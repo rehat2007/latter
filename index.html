@@ -1,12 +1,291 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff1f2" />
+
+  <title>A Letter For You 💌</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .handwriting {
+      font-family: "Dancing Script", cursive;
+    }
+
+    .floating-heart {
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .letter-appear {
+      animation: reveal 0.8s ease-out both;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(-8deg);
+      }
+      50% {
+        transform: translateY(-12px) rotate(8deg);
+      }
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .paper {
+      background-image: linear-gradient(
+        to bottom,
+        transparent 39px,
+        rgba(190, 125, 125, 0.10) 40px
+      );
+      background-size: 100% 40px;
+    }
+
+    .heart-button {
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .heart-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .heart-button:active {
+      transform: scale(0.98);
+    }
+  </style>
 </head>
-<body>
-    Hello world
-    
+
+<body class="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-orange-50 text-rose-950">
+
+  <!-- Decorative background -->
+  <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+    <span class="floating-heart absolute left-[8%] top-[12%] text-2xl opacity-50">♡</span>
+    <span class="floating-heart absolute right-[10%] top-[22%] text-3xl opacity-40" style="animation-delay: 1s">♡</span>
+    <span class="floating-heart absolute bottom-[15%] left-[15%] text-3xl opacity-40" style="animation-delay: 2s">♡</span>
+    <span class="floating-heart absolute bottom-[20%] right-[12%] text-xl opacity-50" style="animation-delay: 0.5s">♡</span>
+  </div>
+
+  <main class="relative flex min-h-screen items-center justify-center px-4 py-8 sm:px-6">
+
+    <!-- PASSWORD SCREEN -->
+    <section
+      id="passwordScreen"
+      class="w-full max-w-md rounded-[2rem] border border-white/80 bg-white/80 p-6 text-center shadow-xl shadow-rose-200/50 backdrop-blur-md sm:p-10"
+    >
+      <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-rose-100 text-5xl shadow-inner">
+        💌
+      </div>
+
+      <p class="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-rose-400">
+        A little something for you
+      </p>
+
+      <h1 class="handwriting text-5xl font-bold text-rose-700 sm:text-6xl">
+        Hey, You!
+      </h1>
+
+      <p class="mx-auto mt-4 max-w-xs text-sm leading-7 text-rose-900/70 sm:text-base">
+        Someone has written something special for you.
+        But first, there's one little secret to unlock. ♡
+      </p>
+
+      <form id="passwordForm" class="mt-8">
+        <label for="password" class="mb-2 block text-left text-sm font-semibold text-rose-800">
+          Do you know the secret password?
+        </label>
+
+        <div class="relative">
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your secret password..."
+            autocomplete="off"
+            required
+            class="w-full rounded-2xl border border-rose-200 bg-rose-50/70 px-4 py-4 pr-12 text-base outline-none transition placeholder:text-rose-300 focus:border-rose-400 focus:ring-4 focus:ring-rose-100"
+          />
+
+          <button
+            type="button"
+            id="togglePassword"
+            aria-label="Show password"
+            class="absolute inset-y-0 right-0 px-4 text-xl text-rose-400"
+          >
+            ♡
+          </button>
+        </div>
+
+        <p
+          id="errorMessage"
+          role="alert"
+          aria-live="polite"
+          class="mt-3 hidden text-sm font-medium text-red-500"
+        >
+          Hmm, that's not quite right. Try again. ♡
+        </p>
+
+        <button
+          type="submit"
+          class="heart-button mt-5 w-full rounded-2xl bg-rose-500 px-5 py-4 font-bold text-white shadow-lg shadow-rose-200 hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-200"
+        >
+          Unlock My Letter ♡
+        </button>
+      </form>
+
+      <p class="mt-6 text-xs text-rose-400">
+        Made with a little love, just for you.
+      </p>
+    </section>
+
+    <!-- LETTER SCREEN -->
+    <section
+      id="letterScreen"
+      class="hidden w-full max-w-2xl"
+      aria-labelledby="letterTitle"
+    >
+      <div class="letter-appear overflow-hidden rounded-[1.5rem] border border-rose-100 bg-[#fffdf8] shadow-2xl shadow-rose-200/60 sm:rounded-[2rem]">
+
+        <div class="bg-rose-500 px-5 py-7 text-center text-white sm:px-10 sm:py-9">
+          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-rose-100">
+            Just for you
+          </p>
+
+          <h2 id="letterTitle" class="handwriting mt-2 text-4xl font-bold sm:text-6xl">
+            A Letter From My Heart
+          </h2>
+
+          <p class="mt-3 text-sm text-rose-100">
+            A few words I've wanted you to read...
+          </p>
+        </div>
+
+        <article class="paper px-5 py-8 sm:px-12 sm:py-12">
+          <p class="handwriting text-3xl font-semibold text-rose-600 sm:text-4xl">
+            Dear You,
+          </p>
+
+          <!-- EDIT YOUR LETTER HERE -->
+          <div class="mt-6 space-y-5 text-[15px] leading-8 text-stone-700 sm:text-base sm:leading-9">
+
+            <p>
+              I don't really know where to begin, but I know there
+              are some things that I wanted to tell you.
+            </p>
+
+            <p>
+              Sometimes, a person comes into our life and makes
+              ordinary moments feel a little more special.
+              Maybe it's a simple conversation, a random smile,
+              or just the feeling of knowing that they're there.
+            </p>
+
+            <p>
+              And somehow, those little things become memories
+              we keep coming back to. I wanted you to know that
+              you have a special place in my thoughts.
+            </p>
+
+            <p>
+              I may not always find the perfect words to express
+              what I feel, but I hope this little letter makes you
+              smile, even if just for a moment.
+            </p
+            <p>
+              Whatever happens, I hope life brings you happiness,
+   
+
+        <footer class="border-t border-rose-100 bg-rose-50 px-5 py-5 text-center">
+          <p class="text-xs tracking-wide text-rose-400">
+            This little page was made especially for you ♡
+          </p>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // =====================================
+    // CUSTOMIZE YOUR SECRET LETTER HERE
+    // =====================================
+
+    const SECRET_PASSWORD = "26092008";
+
+    const passwordScreen = document.getElementById("passwordScreen");
+    const letterScreen = document.getElementById("letterScreen");
+    const passwordForm = document.getElementById("passwordForm");
+    const passwordInput = document.getElementById("password");
+    const errorMessage = document.getElementById("errorMessage");
+    const togglePassword = document.getElementById("togglePassword");
+
+    // Check the password when the form is submitted.
+    passwordForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const enteredPassword = passwordInput.value;
+
+      if (enteredPassword === SECRET_PASSWORD) {
+        errorMessage.classList.add("hidden");
+
+        passwordScreen.classList.add("hidden");
+        letterScreen.classList.remove("hidden");
+
+        // Remove the password from the input.
+        passwordInput.value = "";
+
+        // Move the page to the beginning of the letter.
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      } else {
+        errorMessage.classList.remove("hidden");
+
+        passwordInput.value = "";
+        passwordInput.focus();
+      }
+    });
+
+    // Let her show or hide the password.
+    togglePassword.addEventListener("click", function () {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePassword.textContent = "♥";
+        togglePassword.setAttribute("aria-label", "Hide password");
+      } else {
+        passwordInput.type = "password";
+        togglePassword.textContent = "♡";
+        togglePassword.setAttribute("aria-label", "Show password");
+      }
+    });
+  </script>
+
 </body>
 </html>
